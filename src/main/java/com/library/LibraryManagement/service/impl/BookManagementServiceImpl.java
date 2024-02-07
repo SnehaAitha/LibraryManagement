@@ -56,7 +56,7 @@ public class BookManagementServiceImpl implements BookManagementService {
 
 	@Override
 	@Transactional
-	public void deleteBook(Book book) throws Exception {
-		bookManagementRepo.delete(book);
+	public void deleteBookById(Long id) throws Exception {
+		bookManagementRepo.deleteById(id);
 	}
 }

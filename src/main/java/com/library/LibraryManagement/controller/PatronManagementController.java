@@ -123,7 +123,7 @@ public class PatronManagementController {
 				return new Response<String>(HttpStatus.NOT_FOUND, "Patron details of id "+id+" not found");
 			}
 			else {
-				patronService.deletePatron(patron.get());
+				patronService.deletePatronById(id);
 				cacheService.evictAllCaches();
 				Optional<Patron> deletedPatron = patronService.fetchPatronDetailsById(id);
 				if(deletedPatron == null || deletedPatron.isEmpty()) {

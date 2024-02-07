@@ -10,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.library.LibraryManagement.domain.Book;
-import com.library.LibraryManagement.domain.Patron;
 import com.library.LibraryManagement.repository.BookManagementRepository;
 import com.library.LibraryManagement.repository.PatronManagementRepository;
 import com.library.LibraryManagement.service.BookManagementService;
@@ -37,15 +35,13 @@ public class DeletionTest {
 	
 	@Test
 	public void deletePatron() throws Exception {
-		Patron patron = patronRepo.findById(1L).get();
-		patronService.deletePatron(patron);
+		patronService.deletePatronById(1L);
 		Assert.assertEquals(Optional.empty(),patronRepo.findById(1L));
 	}
 	
 	@Test
-	public void deleteBook() throws Exception {
-		Book book = bookRepo.findById(1L).get();
-		bookService.deleteBook(book);
+	public void deleteBookById() throws Exception {
+		bookService.deleteBookById(1L);
 		Assert.assertEquals(Optional.empty(),bookRepo.findById(1L));
 	}
 

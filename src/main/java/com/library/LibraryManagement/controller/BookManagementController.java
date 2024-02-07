@@ -123,7 +123,7 @@ public class BookManagementController {
 				return new Response<String>(HttpStatus.NOT_FOUND, "Book details of id "+id+" not found");
 			}
 			else {
-				bookService.deleteBook(book.get());	  
+				bookService.deleteBookById(id);	  
 				cacheService.evictAllCaches();
 				Optional<Book> deletedBook = bookService.fetchBookDetailsById(id);
 				if(deletedBook == null || deletedBook.isEmpty()) {

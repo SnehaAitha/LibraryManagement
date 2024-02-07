@@ -84,6 +84,6 @@ public class Patron implements Serializable {
 	public String toString() {
 		return "Patron [id=" + id + ", name=" + name + ", contactInfo=" + contactInfo + ", borrowingRecords="
 				+ borrowingRecords + "]";
-	}	
+	}
 	
 }

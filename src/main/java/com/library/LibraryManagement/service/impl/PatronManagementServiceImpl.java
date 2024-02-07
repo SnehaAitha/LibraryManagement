@@ -50,8 +50,8 @@ public class PatronManagementServiceImpl implements PatronManagementService {
 	
 	@Override
 	@Transactional
-	public void deletePatron(Patron patron) throws Exception {
-		patronManagementRepo.delete(patron);
+	public void deletePatronById(Long id) throws Exception {
+		patronManagementRepo.deleteById(id);
 	}
 	
 }

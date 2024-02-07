@@ -14,7 +14,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-
 @Entity
 @Table(name="BOOK")
 public class Book implements Serializable { 
@@ -100,6 +99,7 @@ public class Book implements Serializable {
 				&& Objects.equals(id, other.id) && Objects.equals(isbn, other.isbn)
 				&& publicationYear == other.publicationYear && Objects.equals(title, other.title);
 	}
+	
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", publicationYear=" + publicationYear

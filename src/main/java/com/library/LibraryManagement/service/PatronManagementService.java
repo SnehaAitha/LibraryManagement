@@ -10,6 +10,6 @@ public interface PatronManagementService {
 	public Patron addPatron(Patron patron) throws Exception;
 	public Optional<Patron> fetchPatronDetailsById(Long id) throws Exception;
 	public Patron updatePatron(Patron patron, Patron existingPatron) throws Exception;
-	public void deletePatron(Patron patron) throws Exception;
+	public void deletePatronById(Long id) throws Exception;
 		
 }

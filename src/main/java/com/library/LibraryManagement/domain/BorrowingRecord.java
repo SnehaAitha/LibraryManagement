@@ -83,6 +83,7 @@ public class BorrowingRecord {
 				&& Objects.equals(borrowingId, other.borrowingId) && Objects.equals(patron, other.patron)
 				&& Objects.equals(returnDate, other.returnDate);
 	}
+	
 	@Override
 	public String toString() {
 		return "BorrowingRecord [borrowingId=" + borrowingId + ", borrowingDate=" + borrowingDate + ", returnDate="
