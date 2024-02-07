@@ -44,10 +44,10 @@ public class BorrowingRecordController {
 			cacheService.evictAllCaches();
 			Optional<Book >book = bookService.fetchBookDetailsById(bookId);
 			Optional<Patron> patron = patronService.fetchPatronDetailsById(patronId);
-			if(book.isEmpty()) {
+			if(book.isEmpty() || !book.isPresent()) {
 				return new Response<BorrowingRecord>(HttpStatus.NOT_FOUND, "Book doesnt exist.", null);
 			}
-			if(patron.isEmpty()) {
+			if(patron.isEmpty() || !patron.isPresent()) {
 				return new Response<BorrowingRecord>(HttpStatus.NOT_FOUND, "Patron doesnt exist.", null);
 			}
 			BorrowingRecord record = borrowingService.findByBookAndPatron(book.get(), patron.get());		    
@@ -76,10 +76,10 @@ public class BorrowingRecordController {
 			cacheService.evictAllCaches();
 			Optional<Book >book = bookService.fetchBookDetailsById(bookId);
 			Optional<Patron> patron = patronService.fetchPatronDetailsById(patronId);
-			if(book.isEmpty()) {
+			if(book.isEmpty() || !book.isPresent()) {
 				return new Response<BorrowingRecord>(HttpStatus.NOT_FOUND, "Book doesnt exist.", null);
 			}
-			if(patron.isEmpty()) {
+			if(patron.isEmpty() || !patron.isPresent()) {
 				return new Response<BorrowingRecord>(HttpStatus.NOT_FOUND, "Patron doesnt exist.", null);
 			}
 			BorrowingRecord record = borrowingService.findByBookAndPatron(book.get(), patron.get());

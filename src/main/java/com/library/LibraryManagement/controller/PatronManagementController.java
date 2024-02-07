@@ -76,7 +76,7 @@ public class PatronManagementController {
 		try {
 			logger.debug("In fetchPatronDetailsById.");
 			Optional<Patron> patron = patronService.fetchPatronDetailsById(id);
-			if(patron != null && !patron.isEmpty()) {
+			if(!patron.isEmpty() && patron.isPresent()) {
 				logger.info("Patron details fetched successfully."+patron);
 				return new Response<Patron>(HttpStatus.OK, "Patron details fetched successfully.", patron.get());
 			}
@@ -95,7 +95,7 @@ public class PatronManagementController {
 			logger.debug("In updatePatron.");
 			cacheService.evictAllCaches();
 			Optional<Patron> existingPatron = patronService.fetchPatronDetailsById(id);
-			if(existingPatron == null || existingPatron.isEmpty()) {
+			if(!existingPatron.isPresent() || existingPatron.isEmpty()) {
 				return new Response<Patron>(HttpStatus.NOT_FOUND, "Patron with id "+id+" doesnt exist.", null);
 			}
 			Patron updatedPatron = patronService.updatePatron(patron,existingPatron.get());
@@ -118,7 +118,7 @@ public class PatronManagementController {
 			logger.debug("In deletePatron.");
 			cacheService.evictAllCaches();
 		    Optional<Patron> patron = patronService.fetchPatronDetailsById(id);
-			if(patron == null || patron.isEmpty()) {
+			if(patron.isEmpty() || !patron.isPresent()) {
 				logger.info("Patron details of id "+id+" not found");
 				return new Response<String>(HttpStatus.NOT_FOUND, "Patron details of id "+id+" not found");
 			}
@@ -126,7 +126,7 @@ public class PatronManagementController {
 				patronService.deletePatronById(id);
 				cacheService.evictAllCaches();
 				Optional<Patron> deletedPatron = patronService.fetchPatronDetailsById(id);
-				if(deletedPatron == null || deletedPatron.isEmpty()) {
+				if(deletedPatron.isEmpty() || !deletedPatron.isPresent()) {
 					logger.info("Patron details of id "+id+" deleted successfully.");
 					return new Response<String>(HttpStatus.OK, "Patron details of id "+id+" deleted successfully.");
 				}

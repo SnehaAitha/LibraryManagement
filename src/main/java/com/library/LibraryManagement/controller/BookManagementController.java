@@ -19,6 +19,7 @@ import com.library.LibraryManagement.domain.Book;
 import com.library.LibraryManagement.response.Response;
 import com.library.LibraryManagement.service.BookManagementService;
 import com.library.LibraryManagement.service.CachingService;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -76,7 +77,7 @@ public class BookManagementController {
 		try {
 			logger.debug("In fetchBookDetailsById.");
 			Optional<Book> book = bookService.fetchBookDetailsById(id);
-			if(book != null && !book.isEmpty()) {
+			if(!book.isEmpty() && book.isPresent()) {
 				logger.info("Book details fetched successfully. "+book);
 				return new Response<Book>(HttpStatus.OK, "Book details fetched successfully.", book.get());
 			}
@@ -95,7 +96,7 @@ public class BookManagementController {
 			logger.debug("In updateBook.");
 			cacheService.evictAllCaches();
 			Optional<Book> existingBook = bookService.fetchBookDetailsById(id);
-			if(existingBook == null || existingBook.isEmpty()) {
+			if(!existingBook.isPresent() || existingBook.isEmpty()) {
 				return new Response<Book>(HttpStatus.NOT_FOUND, "Book with id "+id+" doesnt exist.", null);
 			}
 		    Book updatedBook = bookService.updateBook(book,existingBook.get());
@@ -118,7 +119,7 @@ public class BookManagementController {
 			logger.debug("In deleteBook.");
 			cacheService.evictAllCaches();
 		    Optional<Book> book = bookService.fetchBookDetailsById(id);
-			if(book == null || book.isEmpty()) {
+			if(book.isEmpty() || !book.isPresent()) {
 				logger.info("Book details of id "+id+" not found");
 				return new Response<String>(HttpStatus.NOT_FOUND, "Book details of id "+id+" not found");
 			}
@@ -126,7 +127,7 @@ public class BookManagementController {
 				bookService.deleteBookById(id);	  
 				cacheService.evictAllCaches();
 				Optional<Book> deletedBook = bookService.fetchBookDetailsById(id);
-				if(deletedBook == null || deletedBook.isEmpty()) {
+				if(deletedBook.isEmpty() || !deletedBook.isPresent()) {
 					logger.info("Book details of id "+id+" deleted successfully.");
 					return new Response<String>(HttpStatus.OK, "Book details of id "+id+" deleted successfully.");
 				}
