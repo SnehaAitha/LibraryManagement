@@ -22,11 +22,10 @@ Additional Features:
 2.) HOW TO INTERACT WITH API requests?
 
 -> All the API requests are protected and authenticated using Basic Authentication.
--> While the application is started, a security key appears on the console of IDE.
 -> Open Rest Client, go to Authroization section, select type "Basic Auth" and enter the below credentials in username and password fields to access any endpoint/API request mentioned below.
 
 username: user
-password: security key from the console of your IDE.
+password: password
 
 Book management endpoints:
 
@@ -55,7 +54,7 @@ Borrowing endpoints:
 -> Enter the below credentials.(Same credentials used to access the API endpoints.)
 
 username: user
-password: security key from the console of your IDE.
+password: password
 
 4.) HOW TO RUN JUNIT TESTS?
 -> Right Click on the project, Run As Junit Test.
