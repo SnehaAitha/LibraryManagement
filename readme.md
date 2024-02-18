@@ -10,7 +10,7 @@ Tech Stack:
 
 Additional Features:
 
-● Basic Authentication.
+● JWT Security.
 ● Junit Testing.
 ● Spring Boot caching mechanism using @Cacheable.(Used for fetching one or all book and patron details)
 ● Input validation for API requests and Exception handling with appropriate status codes.
@@ -21,11 +21,9 @@ Additional Features:
 
 2.) HOW TO INTERACT WITH API requests?
 
--> All the API requests are protected and authenticated using Basic Authentication.
--> Open Rest Client, go to Authroization section, select type "Basic Auth" and enter the below credentials in username and password fields to access any endpoint/API request mentioned below.
-
-username: user
-password: password
+-> All the API requests are protected and authenticated using JWT Security.
+-> Get the JWT token - POST http://localhost:8080/api/authenticate
+-> Open Rest Client, go to Authorization section, select type "Bearer Token" and enter the JWT token.
 
 Book management endpoints:
 
@@ -51,9 +49,9 @@ Borrowing endpoints:
 3.) HOW TO INTERACT WITH H2 DB?
 
 -> Go to http://localhost:8080/api/h2-console/.
--> Enter the below credentials.(Same credentials used to access the API endpoints.)
+-> Enter the below credentials.
 
-username: user
+username: sa
 password: password
 
 4.) HOW TO RUN JUNIT TESTS?
