@@ -59,13 +59,14 @@ public class SecurityConfiguration {
                 .and()
                 // dont authenticate this particular request
                 .authorizeRequests()
-                .requestMatchers("/authenticate", "/register").permitAll()
+                .requestMatchers("/authenticate","/h2-console/**").permitAll()
                 // all other requests need to be authenticated
                 .anyRequest().authenticated()
                 ;
 
         // Add a filter to validate the tokens with every request
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.headers().frameOptions().disable();
         return httpSecurity.build();
     }
     
