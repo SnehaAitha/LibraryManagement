@@ -8,9 +8,7 @@ import java.util.Map;
 import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import com.library.LibraryManagement.domain.JwtResponse;
@@ -36,15 +34,8 @@ public class JwtTokenService implements Serializable {
     @Value("${jwt.secret}")
     private String secret;
     
-    @Autowired
-    Environment env;
-    
-   /* @Autowired
-    UserRepository userRepo;
-    @Autowired
-    UserSessionHistoryRepository sessionHistoryRepo;
-    @Autowired
-    private IUserService userService;*/
+    @Value("${spring.security.user.username}")
+    private String username;
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
@@ -114,7 +105,7 @@ public class JwtTokenService implements Serializable {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
         claims.put(ROLES, previliges);*/
-        return new JwtResponse(generateToken(claims,env.getProperty("spring.security.user.username")));
+        return new JwtResponse(generateToken(claims,username));
     }
 
     //while creating the token -
@@ -137,11 +128,6 @@ public class JwtTokenService implements Serializable {
         final String username = getUsernameFromToken(token);
         return username != null && !isTokenExpired(token);
     }
-    
-    /*private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secret);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }*/
     
 	/*public void validateUserIsInteralOrExternal(Authentication authentication) {
 		ARbacRolesHdr roleHdr = null;

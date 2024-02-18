@@ -33,20 +33,8 @@ public class SecurityConfiguration {
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
  
-    /*@Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }*/
- 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-             
-        /*http.csrf().disable().cors().disable().authorizeRequests().requestMatchers("/authenticate").permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);      
-        //http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-        http.authenticationProvider(authenticationProvider());
-        http.headers().frameOptions().sameOrigin();
-
-        return http.build();*/
         
         // We don't need CSRF for this example
         httpSecurity
@@ -75,15 +63,5 @@ public class SecurityConfiguration {
             AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
-    
-    /*@Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-         
-        authProvider.setUserDetailsService(jwtUserDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-     
-        return authProvider;
-    }*/
  
 }
